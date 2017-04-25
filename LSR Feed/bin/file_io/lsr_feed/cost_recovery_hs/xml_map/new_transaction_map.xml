@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--                                                 --><!--    Cost Recovery - New Transaction DTD and XML      --><!--                                                 --><!-- Modification History                                                			--><!-- 02/14/2012 | MM | init		-->
+<!DOCTYPE CSV SYSTEM "./../../../dtd/LSRFeed.dtd"><CSV>  <targetTable name="COST.COST_RECOVERY_HS" />
+  <column>    <db2ColName name="SECTION" />    <CSVMapTo name="SECTION" />    <dataType name="String" maxLength="20" />  </column>
+  <column>    <db2ColName name="DOCNUM" />    <CSVMapTo name="DOCNUM" />    <dataType name="String" maxLength="20" />  </column>
+  <column>    <db2ColName name="INQPERIOD" />    <CSVMapTo name="INQPERIOD" />    <dataType name="String" maxLength="6" />  </column>
+  <column>    <db2ColName name="CALL_NUM" />    <CSVMapTo name="CALL_NUM" />    <dataType name="String" maxLength="20"  />  </column>
+  <column>    <db2ColName name="MACH" />    <CSVMapTo name="MACH" />    <dataType name="String" maxLength="4" />  </column>  <column>    <db2ColName name="SERIAL" />    <CSVMapTo name="SERIAL" />    <dataType name="String" maxLength="20" />  </column>
+  <column>    <db2ColName name="CS_STATUS" />    <CSVMapTo name="CS_STATUS" />    <dataType name="String" maxLength="10" />  </column>
+  <column>    <db2ColName name="CS_BUS_SEG_CDE" />    <CSVMapTo name="CS_BUS_SEG_CDE" />    <dataType name="String" maxLength="10" />  </column>
+  <column>    <db2ColName name="CS_PROD_OWN_CDE" />    <CSVMapTo name="CS_PROD_OWN_CDE" />    <dataType name="String" maxLength="10" />  </column>  <column>    <db2ColName name="SERVCODE" />    <CSVMapTo name="SERVCODE" />    <dataType name="String" maxLength="10" />  </column>
+  <column>    <db2ColName name="RATE_PRIORTY" />    <CSVMapTo name="RATE_PRIORTY" />    <dataType name="String" maxLength="10" />  </column>  <column>    <db2ColName name="DELIVERY" />    <CSVMapTo name="DELIVERY" />    <dataType name="String" maxLength="20" />  </column>
+  <column>    <db2ColName name="DELIVERY_LEVEL" />    <CSVMapTo name="DELIVERY_LEVEL" />    <dataType name="String" maxLength="20" />  </column>
+  <column>    <db2ColName name="SERV_TERR" />    <CSVMapTo name="SERV_TERR" />    <dataType name="String" maxLength="10" />  </column>  <column>    <db2ColName name="UNKNOWN_MACH" />    <CSVMapTo name="UNKNOWN_MACH" />    <dataType name="Integer"  />  </column>
+<column>
+    <db2ColName name="SHIP_DATE" />
+    <CSVMapTo name="SHIP_DATE" />
+    <dataType name="Date" dateFormat="YYYY/MM/DD" />
+  </column>
+  
+  <column>
+      <db2ColName name="WARRANTY_END" />
+      <CSVMapTo name="WARRANTY_END" />
+      <dataType name="Date" dateFormat="YYYY/MM/DD" />
+  </column>
+  
+  <column>
+      <db2ColName name="LENOVO_FLAG" />
+      <CSVMapTo name="LENOVO_FLAG" />
+      <dataType name="Integer"  />
+  </column>
+ <column>
+    <db2ColName name="TOTAL_HRS" />
+    <CSVMapTo name="TOTAL_HRS" />
+    <dataType name="Decimal" />
+  </column>
+  <column>
+      <db2ColName name="PART_ROWS" />
+      <CSVMapTo name="PART_ROWS" />
+      <dataType name="Decimal" />
+  </column>
+  <column>
+      <db2ColName name="LABOUR_COST" />
+      <CSVMapTo name="LABOUR_COST" />
+      <dataType name="Decimal" />
+  </column>
+  <column>
+      <db2ColName name="PART_COST" />
+      <CSVMapTo name="PART_COST" />
+      <dataType name="Decimal" />
+  </column>
+  <column>
+      <db2ColName name="DISTRIBUTION_COST" />
+      <CSVMapTo name="DISTRIBUTION_COST" />
+      <dataType name="Decimal" />
+  </column>
+   <column>
+        <db2ColName name="PROVISION_COST" />
+        <CSVMapTo name="PROVISION_COST" />
+        <dataType name="Decimal" />
+  </column>
+   <column>
+        <db2ColName name="TOTAL_COST" />
+        <CSVMapTo name="TOTAL_COST" />
+        <dataType name="Decimal" />
+  </column>
+</CSV>

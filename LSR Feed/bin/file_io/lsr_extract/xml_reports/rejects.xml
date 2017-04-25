@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--                                                 -->
+<!--    Break-fix - Report SQLs DTD and XML          -->
+<!--                                                 -->
+
+<!-- Modification History                            	 		-->
+<!-- 01/06/2005 | KW | First Cut					-->
+<!-- 01/09/2005 | KW | Moved DTD to external file LSRExtract.dtd	-->
+<!-- 03/28/2006 | VM | C2246 Changed SQl for each report to add new Reject Description             -->
+
+<!DOCTYPE reports SYSTEM "./../../dtd/LSRExtract.dtd">
+
+<reports>
+
+  <!-- ******************************************************************* -->
+  <!-- Rejected Transactions that need Confirmation or Re-submission 	   -->
+  <!-- 				BREAK FIX				   -->
+  <!-- ******************************************************************* -->
+ 
+ <report includeHeader="Db2Header">
+    <fileName text="bf_Confirm_Reject_or_Resubmit.csv" />
+    <SQL text="
+	SELECT
+		A.MACH,
+		A.SERIAL,
+		A.LLI,
+		A.PERIOD_END_DTE,
+		A.SERVICE_DTE,
+		A.DOCNUM,
+		A.ECA,
+		A.POSTAL_CDE,
+		B.COUNTRY_CDE,
+		A.WW_CDE,
+		B.REJECT_CDE,
+		C.DESCRIPTION,
+		B.LENOVO_KEY,
+		'N' AS RESUBMIT_IND,
+		B.COMMENTS,
+		A.SDW_COMP_ID,
+		A.US_BILL_DESC,
+		A.CDN_BILL_DESC,
+		A.TRANSACTION_CNT,
+		A.PROVINCE_NAME,
+		A.LENA_CASE,
+		A.SERV_PERFORMED_DTE,
+		A.WESSN_DOCNUM,
+		A.WESSN_DOCNUM_DTE,
+		A.NSS_CALL_NUM,
+		A.CALL_RECD_DTE,
+		A.BP_ID,
+		A.ORIGINAL_BP_ID,
+		A.DATA_SOURCE,
+		A.BILLING_RATE,
+		A.TRANSACTION_ID,
+		A.REJECT_ID
+	FROM LENOVO.BF_DETAIL A LEFT JOIN LENOVO.BF_REJECT B ON A.REJECT_ID=B.REJECT_ID 
+	     LEFT JOIN LENOVO.REJ_CODE_REF C ON B.REJECT_CDE = C.REJECT_CDE
+	WHERE B.STATUS = 'NEW' AND B.CLOSED = 'N' AND A.PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+      " />
+  </report>
+  
+  
+  <!-- ******************************************************************* -->
+  <!-- Rejected Transactions that need Confirmation or Re-submission 	   -->
+  <!-- 				DEPOT REPAIR				   -->
+  <!-- ******************************************************************* -->
+  
+  <report includeHeader="Db2Header">
+      <fileName text="dr_Confirm_Reject_or_Resubmit.csv" />
+      <SQL text="
+  	SELECT
+	  	A.MACH,
+		A.SERIAL,
+		A.LLI,
+		A.PERIOD_END_DTE,
+		A.DOCNUM,
+		A.ECA,
+		A.POSTAL_CDE,
+		B.COUNTRY_CDE,
+		A.WW_CDE,
+		B.REJECT_CDE,
+		C.DESCRIPTION,
+		B.LENOVO_KEY,
+		'N' AS RESUBMIT_IND,
+		B.COMMENTS,
+		A.SDW_COMP_ID,
+		A.US_BILL_DESC,
+		A.CDN_BILL_DESC,
+		A.TRANSACTION_CNT,
+		A.PROVINCE_NAME,
+		A.LENA_CASE,
+		A.SERV_PERFORMED_DTE,
+		A.WESSN_DOCNUM,
+		A.WESSN_DOCNUM_DTE,
+		A.BP_ID,
+		A.ORIGINAL_BP_ID,
+		A.DATA_SOURCE,
+		A.BILLING_RATE,
+		A.TRANSACTION_ID,
+		A.REJECT_ID
+	FROM LENOVO.DR_DETAIL A LEFT JOIN LENOVO.DR_REJECT B ON A.REJECT_ID=B.REJECT_ID 
+	     LEFT JOIN LENOVO.REJ_CODE_REF C ON B.REJECT_CDE = C.REJECT_CDE	
+  	WHERE B.STATUS = 'NEW' AND B.CLOSED = 'N' AND A.PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+        " />
+  </report>
+
+
+  <!-- ******************************************************************* -->
+  <!-- Rejected Transactions that need Confirmation or Re-submission 	   -->
+  <!-- 				REMOTE CS				   -->
+  <!-- ******************************************************************* -->
+  
+  <report includeHeader="Db2Header">
+      <fileName text="rcs_Confirm_Reject_or_Resubmit.csv" />
+      <SQL text="
+  	SELECT
+		A.MACH,
+		A.SERIAL,
+		A.LLI,
+		A.PERIOD_END_DTE,
+		A.DOCNUM,
+		A.POSTAL_CDE,
+		B.COUNTRY_CDE,
+		A.WW_CDE,
+		B.REJECT_CDE,
+		C.DESCRIPTION,
+		B.LENOVO_KEY,
+		'N' AS RESUBMIT_IND,
+		B.COMMENTS,
+		A.SDW_COMP_ID,
+		A.US_BILL_DESC,
+		A.CDN_BILL_DESC,
+		A.TRANSACTION_CNT,
+		A.PROVINCE_NAME,
+		A.LENA_CASE,
+		A.SERV_PERFORMED_DTE,
+		A.WESSN_DOCNUM,
+		A.WESSN_DOCNUM_DTE,
+		A.NSS_CALL_NUM,
+		A.CALL_RECD_DTE,
+		A.BP_ID,
+		A.ORIGINAL_BP_ID,
+		A.DATA_SOURCE,
+		A.BILLING_RATE,
+		A.TRANSACTION_ID,
+		A.REJECT_ID
+	FROM LENOVO.RCS_DETAIL A LEFT JOIN LENOVO.RCS_REJECT B ON A.REJECT_ID=B.REJECT_ID 
+	     LEFT JOIN LENOVO.REJ_CODE_REF C ON B.REJECT_CDE = C.REJECT_CDE	
+  	WHERE B.STATUS = 'NEW' AND B.CLOSED = 'N' AND A.PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+        " />
+  </report>
+
+
+
+  <!-- ******************************************************************* -->
+  <!-- Rejected Transactions that need Confirmation or Re-submission 	   -->
+  <!-- 				INSTALL					   -->
+  <!-- ******************************************************************* -->
+  
+  <report includeHeader="Db2Header">
+      <fileName text="ins_Confirm_Reject_or_Resubmit.csv" />
+      <SQL text="
+  	SELECT
+		A.MACH,
+		A.SERIAL,
+		A.LLI,
+		A.PERIOD_END_DTE,
+		A.SERVICE_DTE,
+		A.DOCNUM,
+		A.POSTAL_CDE,
+		B.COUNTRY_CDE,
+		A.WW_CDE,
+		B.REJECT_CDE,
+		C.DESCRIPTION,
+		B.LENOVO_KEY,
+		'N' AS RESUBMIT_IND,
+		B.COMMENTS,
+		A.SDW_COMP_ID,
+		A.US_BILL_DESC,
+		A.CDN_BILL_DESC,
+		A.TRANSACTION_CNT,
+		A.PROVINCE_NAME,
+		A.LENA_CASE,
+		A.SERV_PERFORMED_DTE,
+		A.WESSN_DOCNUM,
+		A.WESSN_DOCNUM_DTE,
+		A.NSS_CALL_NUM,
+		A.CALL_RECD_DTE,
+		A.BP_ID,
+		A.ORIGINAL_BP_ID,
+		A.DATA_SOURCE,
+		A.BILLING_RATE,
+		A.TRANSACTION_ID,
+		A.REJECT_ID
+	FROM LENOVO.INS_DETAIL A LEFT JOIN LENOVO.INS_REJECT B ON A.REJECT_ID=B.REJECT_ID 
+	     LEFT JOIN LENOVO.REJ_CODE_REF C ON B.REJECT_CDE = C.REJECT_CDE	
+  	WHERE B.STATUS = 'NEW' AND B.CLOSED = 'N' AND A.PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+        " />
+  </report>
+
+
+
+  <!-- ******************************************************************* -->
+  <!-- Rejected Transactions that need Confirmation or Re-submission 	   -->
+  <!-- 				PARTS					   -->
+  <!-- ******************************************************************* -->
+  
+  <report includeHeader="Db2Header">
+      <fileName text="pl_Confirm_Reject_or_Resubmit.csv" />
+      <SQL text="
+  	SELECT
+		A.MACH,
+		A.SERIAL,
+		A.LLI,
+		A.PERIOD_END_DTE,
+		A.SHIP_DTE,
+		A.DOCNUM,
+		A.CLAIM_NUM,
+		A.PARTNO,
+		A.PARTQTY,
+		A.PART_COST,
+		A.DIST_COST,
+		A.PART_CREDIT,
+		A.POSTAL_CDE,
+		A.ORDER_NUM,
+		B.COUNTRY_CDE,
+		A.WW_CDE,
+		B.REJECT_CDE,
+		C.DESCRIPTION,
+		B.LENOVO_KEY,
+		'N' AS RESUBMIT_IND,
+		B.COMMENTS,
+		A.SDW_COMP_ID,
+		A.US_BILL_DESC,
+		A.CDN_BILL_DESC,
+		A.TRANSACTION_CNT,
+		A.PROVINCE_NAME,
+		A.LENA_CASE,
+		A.SERV_PERFORMED_DTE,
+		A.WESSN_DOCNUM,
+		A.WESSN_DOCNUM_DTE,
+		A.NSS_CALL_NUM,
+		A.CALL_RECD_DTE,
+		A.BP_ID,
+		A.ORIGINAL_BP_ID,
+		A.DATA_SOURCE,
+		A.BILLING_RATE,
+		A.ASN,
+		A.JOB_NUMBER,
+		A.TRANSACTION_ID,
+		A.REJECT_ID
+	FROM LENOVO.PL_DETAIL A LEFT JOIN LENOVO.PL_REJECT B ON A.REJECT_ID=B.REJECT_ID 
+	     LEFT JOIN LENOVO.REJ_CODE_REF C ON B.REJECT_CDE = C.REJECT_CDE	
+	WHERE B.STATUS = 'NEW' AND B.CLOSED = 'N' AND A.PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+        " />
+  </report>
+
+</reports>
+

@@ -1,0 +1,61 @@
+
+<!-- DTD (Document Type Definition) file to validate all LSRFeed XMLs:	-->
+<!--     new_transaction_map.xml					-->
+<!--     approved_map.xml						-->
+<!--     rejected_map.xml						-->
+<!--     resubmit_map.xml						-->
+<!-- The above xml files are used in these Lenovo business lines:	-->
+<!--     break-fix			(bf)				-->
+<!--     depot repair			(dr)				-->
+<!--	 install			(ins)				-->
+<!--	 parts logistics 		(pl)				-->
+<!--	 remote customer support 	(rcs)				-->
+
+<!-- Modification History                                              	-->
+<!-- 01/09/2005 | KW | First Cut					-->
+<!-- 03/28/2006 | VM | C2246 Added new validation feature notEQValue which is a         -->
+<!--                   new implied attribute of the dataType element                    -->
+<!-- 03/28/2011 | MM | C4327 modify the LSR Feed tool to allow data in DB2 TIME and TIMESTAMP format to be inserted.-->
+<!--                   dataType name="TIME" timeFormat="hh:mm:ss a"  dataType name="TIMESTAMP" timestampFormat="yyyy-mm-dd hh:mm:ss.fffffffff"  -->
+
+<!-- CSV element: contains 1 targetTable element and >=1 column element -->
+<!ELEMENT CSV (targetTable,column+)>
+
+	<!-- Optional fileNameMustContain attribute verifies CSV filename contains the phrase expected by the business transaction folder containing it -->
+	<!-- (e.g., in case an 'approved' csv file is placed in a 'rejected' transaction folder by mistake) -->
+        <!ATTLIST CSV fileNameMustContain CDATA #IMPLIED>        
+	<!-- targetTable is an empty element (no enclosed text) -->
+	<!-- Its name attribute contains any character data -->
+	<!ELEMENT targetTable EMPTY>
+	
+		<!ATTLIST targetTable name CDATA #REQUIRED>
+
+	<!-- db2ColName, CSVMapTo, CSVIndex can appear at most once, if at all, in the column element. -->
+	<!-- dataType must appear once in column element. --> 
+	<!ELEMENT column (db2ColName?,CSVMapTo?,CSVIndex?,dataType) >
+
+		<!ELEMENT db2ColName EMPTY > 
+		
+			<!ATTLIST db2ColName name ID #IMPLIED >
+
+		<!ELEMENT CSVMapTo EMPTY >
+
+			<!ATTLIST CSVMapTo name CDATA #IMPLIED >
+
+		<!ELEMENT CSVIndex EMPTY >
+
+			<!ATTLIST CSVIndex number CDATA #IMPLIED 
+					   name CDATA #IMPLIED>
+
+		<!-- dataType name attribute is mandatory and can be String/Date/Integer/Decimal -->
+		<!-- maxLength, dateFormat,timeFormat,timestampFormat minValue, maxValue attributes are optional -->
+		<!ELEMENT dataType EMPTY >
+
+			<!ATTLIST dataType name (String | Date | Time | Timestamp | Integer | Decimal) #REQUIRED
+				  maxLength CDATA #IMPLIED
+				  dateFormat CDATA #IMPLIED
+          timeFormat CDATA #IMPLIED
+          timestampFormat CDATA #IMPLIED
+				  minValue CDATA #IMPLIED
+				  maxValue CDATA #IMPLIED
+				  notEqValue CDATA #IMPLIED>

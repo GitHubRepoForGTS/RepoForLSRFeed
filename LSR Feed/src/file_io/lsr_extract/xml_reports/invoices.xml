@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--                                                 -->
+<!--    Break-fix - Report SQLs DTD and XML          -->
+<!--                                                 -->
+
+<!-- Modification History                            	 		-->
+<!-- 01/06/2005 | KW | First Cut					-->
+<!-- 01/09/2005 | KW | Moved DTD to external file LSRExtract.dtd	-->
+<!-- 03/28/2006 | VM | C2246 Changed SQl for each report to add new columns             -->
+<!--                   C2246 Changed the export file name for all reports               -->
+<!--                   C2246 Changed the date format for all reports                    -->
+
+
+<!DOCTYPE reports SYSTEM "./../../dtd/LSRExtract.dtd">
+
+<reports>
+
+  <!-- Bill to Lenovo (includes new and resubmitted transactions -->
+
+  <report includeHeader="Custom">
+    <fileName text="onsitebfservice_CA.csv" />
+    <dateFormat text="YYYYMMDD" />
+    <timeFormat text="HH:MM:SS" />
+    <SQL text="
+	SELECT 	MACH,SERIAL,LLI,PERIOD_END_DTE,SERVICE_DTE,DOCNUM,ECA,POSTAL_CDE,COUNTRY_CDE,WW_CDE,CASE WHEN STATUS = 'NEW' THEN 'N' WHEN STATUS = 'RESUBMIT' THEN 'R' END AS RESUBMIT_IND,'' AS LENOVO_KEY,TRANSACTION_ID,HOURS,COMPANY_NAME,CUSTOMER_PHONE,ADDRESS_FLOOR,ADDRESS_STREET,DISTRICT,CITY,STATE,CLAIM_NUMBER
+	FROM LENOVO.BF_BILLABLE_V 
+	WHERE PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+    " />
+  </report>
+
+  <report includeHeader="Custom">
+    <fileName text="depotrepair_CA.csv" />
+    <dateFormat text="YYYYMMDD" />
+    <timeFormat text="HH:MM:SS" />
+    <SQL text="
+	SELECT 	MACH,SERIAL,LLI,PERIOD_END_DTE,DOCNUM,ECA,POSTAL_CDE,COUNTRY_CDE,WW_CDE,CASE WHEN STATUS = 'NEW' THEN 'N' WHEN STATUS = 'RESUBMIT' THEN 'R' END AS RESUBMIT_IND,'' AS LENOVO_KEY,TRANSACTION_ID,HOURS,COMPANY_NAME,CUSTOMER_PHONE,ADDRESS_FLOOR,ADDRESS_STREET,DISTRICT,CITY,STATE,CLAIM_NUMBER
+	FROM LENOVO.DR_BILLABLE_V 
+	WHERE PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+    " />
+  </report>
+
+  <report includeHeader="Custom">
+    <fileName text="installation_CA.csv" />
+    <dateFormat text="YYYYMMDD" />
+    <timeFormat text="HH:MM:SS" />
+    <SQL text="
+    	SELECT 	MACH,SERIAL,LLI,PERIOD_END_DTE,SERVICE_DTE,DOCNUM,POSTAL_CDE,COUNTRY_CDE,WW_CDE,CASE WHEN STATUS = 'NEW' THEN 'N' WHEN STATUS = 'RESUBMIT' THEN 'R' END AS RESUBMIT_IND,'' AS LENOVO_KEY,TRANSACTION_ID,COMPANY_NAME,CUSTOMER_PHONE,ADDRESS_FLOOR,ADDRESS_STREET,DISTRICT,CITY,STATE,CLAIM_NUMBER
+    	FROM LENOVO.INS_BILLABLE_V 
+    	WHERE PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+    " />
+  </report>
+
+  <report includeHeader="Custom">
+    <fileName text="partslogistics_CA.csv" />
+    <dateFormat text="YYYYMMDD" />
+    <timeFormat text="HH:MM:SS" />
+    <SQL text="
+    	SELECT 	MACH,LLI,PERIOD_END_DTE,SHIP_DTE,DOCNUM,CLAIM_NUM,PARTNO,PARTQTY,PART_COST,DIST_COST,PART_CREDIT,POSTAL_CDE,ORDER_NUM,COUNTRY_CDE,WW_CDE,CASE WHEN STATUS = 'NEW' THEN 'N' WHEN STATUS = 'RESUBMIT' THEN 'R' END AS RESUBMIT_IND,'' AS LENOVO_KEY,TRANSACTION_ID,SERIAL,COMPANY_NAME,CUSTOMER_PHONE,ADDRESS_FLOOR,ADDRESS_STREET,DISTRICT,CITY,STATE
+    	FROM LENOVO.PL_BILLABLE_V 
+    	WHERE PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+    " />
+  </report>
+
+  <report includeHeader="Custom">
+    <fileName text="remotecustsupport_CA.csv" />
+    <dateFormat text="YYYYMMDD" />
+    <timeFormat text="HH:MM:SS" />
+    <SQL text="
+	SELECT 	MACH,SERIAL,LLI,PERIOD_END_DTE,DOCNUM,POSTAL_CDE,COUNTRY_CDE,WW_CDE,CASE WHEN STATUS = 'NEW' THEN 'N' WHEN STATUS = 'RESUBMIT' THEN 'R' END AS RESUBMIT_IND,'' AS LENOVO_KEY,TRANSACTION_ID,COMPANY_NAME,CUSTOMER_PHONE,ADDRESS_FLOOR,ADDRESS_STREET,DISTRICT,CITY,STATE,BRAND,RCS_CATEGORY,CLAIM_NUMBER
+	FROM LENOVO.RCS_BILLABLE_V 
+	WHERE PERIOD_END_DTE IN (SELECT PERIOD_END_DTE FROM LENOVO.PERIOD_DATES WHERE YEAR = YEAR(CURRENT DATE - 1 MONTH) AND MONTH = MONTH(CURRENT DATE - 1 MONTH))
+    " />
+  </report>
+
+</reports>

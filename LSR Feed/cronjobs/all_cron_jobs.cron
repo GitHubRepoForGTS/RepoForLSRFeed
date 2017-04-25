@@ -1,0 +1,81 @@
+# ---------------------------------
+# Name:  all_cron_jobs.cron
+# ---------------------------------
+# Description:  this file contains all LSR cron jobs.
+# ---------------------------------
+# Arguments:   none
+# ---------------------------------
+# Change History - # First Released in 2007-08-08
+# 	2007-12-07 - JWF - changed name from LSRFEED.cron 
+#                    - added schedule for load_tier_1_cru  
+#	2008-07-28 - MM - changed path of chkpwd.sh
+#	2009-01-25 - MM - C3427 Changed LSRFeed runs every 1/2 hour.
+#					- changed all cron jobs run as background.
+#	2009-02-12 - MM - C3708 add updatebacklog.sh runs  at 8:00 AM first day every month.
+#					- version: 1.0.1
+#	2009-03-23 - MM - C3783 change the current load schedule to every Friday at beginning at 7:00 AM. 
+#	2009-05-12 - HS - C3863 add load schedule to run every day Monday - Thursday at 7:00am 
+#	2009-06-11 - HS - C3860 add load schedule to run reports 
+#					- version 1.0.3
+#	2009-08-21 - MM - C3949 Remove backlog
+#					- version 1.0,4
+#	2009-10-29 - MM - C4003 Rename MTYPE to MTYPE_LOAD
+#					- version 1.0.5
+#	2010-03-25 - MM - C4108 Add LSRExtract to retrive data from CDNIW runs every day at 1:00 in the afternoon. 
+#					- version 1.0.6
+#   2010-12-23 - SP - C4266 Modify ICPM Pull shell to include more data pull feeds
+#                   - version 1.0.7
+#    2012-02-23 -MM - C4530 Added data pull for cost recovery tables.
+#					-version 1.0.8
+#    2012-05-04 - MM - C4587 Added data pull for utilization history table.
+#                                     -version 1.0.9
+#    2013-05-27 - SP - C4756 Added data pull for Clarify RCS Table.
+#                                     -version 1.1.0
+# LSRFEED CRONTAB SCHEDULER
+# =======================
+# Do not send email on output
+MAILTO=
+
+#C4756
+version="1.1.0"
+
+# HOW TO READ CRONTAB ENTRY
+# ========================== 
+#minute  hour  day_of_month  month  weekday  command
+
+# password expiry checking, run every day 00:00:00 12:00 AM 
+00 00 * * *   . ~/.profile && $HOME/cronjobs/chkpwd/chkpwd.sh &
+
+# LSRFeed process
+# run every 1/2 hour 24 hours per day 7 days per week
+00,30 * * * *  . ~/.profile && $HOME/lsrfeed/RunLSRFeed.sh &
+
+# Load data from CDNIW to local Cost_Recovery table
+#  MON - FRI 7AM AND SAT 1:00PM
+00 7 * * 1-5 . ~/.profile && $HOME/lsrfeed/RunCostPull.sh  &
+00 13 * * 6 . ~/.profile && $HOME/lsrfeed/RunCostPull.sh  &
+
+# Load data from remote table process
+# run every day at 8:00am, load full tables on Friday.
+# if any error occurred, will re-try next day.
+00 8 * * * . ~/.profile && $HOME/cronjobs/loaddata/importdata.sh FRI &
+
+# Load data from individual remote table process
+# run every day Monday - Thursday at 7:00am
+00 8 * * 1-4 . ~/.profile && $HOME/cronjobs/loaddata/importdata.sh MTYPE_PART &
+00 8 * * 1-4 . ~/.profile && $HOME/cronjobs/loaddata/importdata.sh PARTS &
+00 8 * * 1-4 . ~/.profile && $HOME/cronjobs/loaddata/importdata.sh MTYPE_LOAD &
+00 8 * * 1-4 . ~/.profile && $HOME/cronjobs/loaddata/importdata.sh WAC_FAMILY_CAP &
+00 8 * * 1-4 . ~/.profile && $HOME/cronjobs/loaddata/importdata.sh RTO &
+
+#Retrive UTILIZATION HISTORY every day at 10:00 am.
+00 10 * * * . ~/.profile && $HOME/lsrfeed/RunUtilHistory.sh &
+
+# Retrive data from CDNIW runs every day at 1:00 in the afternoon. 
+00 13 * * * . ~/.profile && $HOME/lsrfeed/RunServicePull.sh 1 &
+
+# Run LCBO data pull every Friday at 1:00 PM
+00 13 * * 5 . ~/.profile && $HOME/lsrfeed/RunLCBO.sh  &
+
+# Run Clarify RCS script every day Monday - Friday at 8:30 AM
+30 08 * * 1-5 . ~/.profile && $HOME/lsrfeed/RunClarify_RCS.sh &

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>  <!--                                                 	--> 
+<!--    COST RECOVERY					--> <!--                                                 	-->  
+<!-- Modification History                            	 											--> 
+<!-- 2013-03-15 | VM | First Cut														-->  
+<!DOCTYPE reports SYSTEM "./../../dtd/LSRExtract.dtd"> 
+ <reports>    
+ <multiReport>       
+<fileName text="clarify_rcs.csv" />      
+ <dateFormat text="yyyy-mm-dd" />     
+  <timeFormat text="HH:MM:SS" />       
+ <subReport includeHeader="Db2Header" includeTotals="N">       	
+
+<SQL text="      	 		SELECT OBJID, PROBLEM_NUMBER, MACHINE_TYPE, SERIAL_NUMBER, X_CAD_NUMBER, X_PROBLEM, DATE(LOAD_TIMESTAMP) || ' 00:00:00' AS LOAD_TIMESTAMP, OPEN_DATE, CLOSE_DATE, LIB_IND FROM TSSADM.CLARIFY_RCS WHERE CTRY ='CA' AND LOAD_TIMESTAMP >= '2011-12-31 00:00:00' 	"/>      
+ </subReport>         
+ </multiReport>    
+  </reports> 

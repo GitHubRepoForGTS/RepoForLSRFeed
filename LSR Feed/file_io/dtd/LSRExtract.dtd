@@ -1,0 +1,47 @@
+<!-- DTD (Document Type Definition) file to validate LSRExtract report.xml -->
+<!-- used in these Lenovo business lines:				-->
+<!--     break-fix			(bf)				-->
+<!--     depot repair			(dr)				-->
+<!--	 install			(ins)				-->
+<!--	 parts logistics 		(pl)				-->
+<!--	 remote customer support 	(rcs)				-->
+
+<!-- Modification History                                              	-->
+<!-- 01/09/2005 | KW | First Cut					-->
+<!-- 06/20/2006 | VM | Added a new multi report node which can contain  -->
+<!--                   one or more sub reports.                         -->
+<!-- 07/06/2012 | MM | Added attribute delimiter for fileName           -->
+<!-- reports element: contains >=1 report or multiReport elements -->
+
+<!ELEMENT reports ((report | multiReport)+)>
+	<!-- dateFormat, timeFormat can appear at most once, if at all, in the report element. -->
+	<!--   if dateFormat is not specified, it will be defaulted to YYYYMMDD                -->
+	<!--   if timeFormat is not specified, it will be defaulted to hh:mm:ss                -->
+	<!-- fileName, SQL must appear once in report element.                                 --> 
+	<!ELEMENT report (fileType?,fileName,dateFormat?,timeFormat?,SQL) >
+		<!-- includeHeader attribute specifies the format of header record, if one is wanted at all -->
+		<!-- Custom: *HDR nnnnnn fileNameText_yyyymmdd.csv yyyymmdd 	-->
+		<!-- Db2Header: Db2 column names 				-->
+		<!ATTLIST report includeHeader (Custom | Db2Header | None) #IMPLIED>
+	<!ELEMENT multiReport (fileType?,fileName,dateFormat?,timeFormat?,subReport+) >
+		<!ELEMENT fileType EMPTY > 
+			<!ATTLIST fileType text (csv|xls) "csv">
+      		<!ATTLIST fileType title CDATA #IMPLIED>
+		<!ELEMENT fileName EMPTY > 
+			<!ATTLIST fileName text CDATA #REQUIRED >
+			<!ATTLIST fileName delimiter CDATA #IMPLIED >
+		<!ELEMENT dateFormat EMPTY > 
+			<!ATTLIST dateFormat text CDATA #IMPLIED >
+		<!ELEMENT timeFormat EMPTY > 
+			<!ATTLIST timeFormat text CDATA #IMPLIED >
+		<!ELEMENT SQL EMPTY >
+			<!ATTLIST SQL text CDATA #REQUIRED >
+		<!ELEMENT subReport (SQL)>
+			<!-- includeHeader attribute specifies the format of header record, if one is wanted at all -->
+			<!-- Db2Header: Db2 column names or None 				-->
+			<!ATTLIST subReport includeHeader (Db2Header | None) #IMPLIED>
+			<!-- includeTotals attribute specifies numeric columns should have the total generated -->
+			<!ATTLIST subReport includeTotals (Y | y | N | n) #IMPLIED>
+
+	
+

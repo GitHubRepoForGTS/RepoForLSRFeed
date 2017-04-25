@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--                                                   -->
+<!--     Install - Rejected Transaction DTD and XML    -->
+<!--                                                   -->
+
+<!-- Modification History                                                			-->
+<!-- 01/06/2005 | KW | First Cut (CSVIndex to be finalized when CSV record is available)	-->
+<!-- 01/09/2005 | KW | Moved DTD to external file LSRFeed.dtd					-->
+<!-- 06/12/2007 | VM | Added Mach, Serial, LLI, Country Code, WW Code fields to be picked up    -->
+
+
+<!DOCTYPE CSV SYSTEM "./../../../dtd/LSRFeed.dtd">
+
+<CSV fileNameMustContain = "reject,unaccepted">
+  <targetTable name="LENOVO.INS_REJECT" />
+  <column>
+    <db2ColName name="MACH" />
+    <CSVIndex number="0" />
+    <dataType name="String" maxLength="4" />
+  </column>
+  <column>
+    <db2ColName name="SERIAL" />
+    <CSVIndex number="1" />
+    <dataType name="String" maxLength="25" />
+  </column>
+  <column>
+    <db2ColName name="LLI" />
+    <CSVIndex number="2" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <db2ColName name="COUNTRY_CDE" />
+    <CSVIndex number="7" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <db2ColName name="WW_CDE" />
+    <CSVIndex number="8" />
+    <dataType name="String" maxLength="2" />
+  </column>
+  <column>
+    <db2ColName name="LENOVO_KEY" />
+    <CSVIndex number="10" />
+    <dataType name="String" maxLength="10" />
+  </column>
+  <column>
+    <db2ColName name="TRANSACTION_ID" />
+    <CSVIndex number="11" />
+    <dataType name="String" maxLength="20" />
+  </column>
+  <column>
+    <db2ColName name="REJECT_CDE" />
+    <CSVIndex number="12" />
+    <dataType name="Integer" />
+  </column>
+</CSV>

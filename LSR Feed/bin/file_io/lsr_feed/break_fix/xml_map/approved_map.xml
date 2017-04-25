@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--                                                   -->
+<!--    Break-fix - Approved Transaction DTD and XML   -->
+<!--                                                   -->
+
+<!-- Modification History                                                			-->
+<!-- 01/06/2005 | KW | Added fileNameMustContain attribute to CSV element in DTD and XML	-->
+<!--                   Added text attribute to CSVIndex element in DTD and XML			-->
+<!--                   Changed TRANSACTION_ID dataType from Integer to String with maxLength 20 -->
+<!-- 01/09/2005 | KW | Moved DTD to external file LSRFeed.dtd					-->
+
+
+<!DOCTYPE CSV SYSTEM "./../../../dtd/LSRFeed.dtd">
+
+<CSV fileNameMustContain="invoice,accepted">
+  <targetTable name="LENOVO.BF_DETAIL" />
+  <column>
+    <CSVIndex number="0" name="MACH" />
+    <dataType name="String" maxLength="4" />
+  </column>
+  <column>
+    <CSVIndex number="1" name="SERIAL" />
+    <dataType name="String" maxLength="25" />
+  </column>
+  <column>
+    <CSVIndex number="5" name="DOCNUM" />
+    <dataType name="String" maxLength="9" />
+  </column>
+  <column>
+    <CSVIndex number="8" name="COUNTRY_CDE" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <CSVIndex number="9" name="WW_CDE" />
+    <dataType name="String" maxLength="2" />
+  </column>
+  <column>
+    <CSVIndex number="11" name="TRANSACTION_ID" />
+    <dataType name="String" maxLength="20" />
+  </column>
+  <column>
+    <CSVIndex number="2" name="LLI" />
+    <dataType name="String" maxLength="3" />
+  </column>  
+</CSV>

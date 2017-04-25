@@ -1,0 +1,9 @@
+ClearCase CopyAreaDB|4
+tsgui_lb_comp\LSR\Feed Source\file_io
+2
+5
+13:UAT Test Load Files|2|0|0|0|ab4c1b8384344f2e97233a4dcc7c86f1|0
+8:cron_log|2|0|0|0|e839e2242c7640d98291c7170040ed3a|0
+8:lsr_feed|2|0|0|0|4a278302cf62471ca05d5bc8e8f5bb8c|0
+3:dtd|2|0|0|0|8064bbc160db49ec93facaf8c1ff265c|0
+b:lsr_extract|2|0|0|0|094930d1bb764464aba4f3b7da2c5bb0|0

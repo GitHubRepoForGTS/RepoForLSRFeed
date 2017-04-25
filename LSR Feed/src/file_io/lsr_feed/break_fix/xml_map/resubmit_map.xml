@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--                                                      -->
+<!--    Break-fix - Resubmitted Transaction DTD and XML   -->
+<!--                                                      -->
+
+<!-- Modification History                                                			-->
+<!-- 01/06/2005 | KW | First Cut								-->
+<!-- 01/09/2005 | KW | Moved DTD to external file LSRFeed.dtd					-->
+
+
+<!DOCTYPE CSV SYSTEM "./../../../dtd/LSRFeed.dtd">
+
+<CSV>
+  <targetTable name="LENOVO.BF_REJECT" />
+
+  <!-- CSV columns used for updating DB2 -->
+  <column>
+    <db2ColName name="MACH" />
+    <CSVMapTo name="MACH" />
+    <dataType name="String" maxLength="4" />
+  </column>
+  <column>
+    <db2ColName name="SERIAL" />
+    <CSVMapTo name="SERIAL" />
+    <dataType name="String" maxLength="25" />
+  </column>
+  <column>
+    <db2ColName name="LLI" />
+    <CSVMapTo name="LLI" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <db2ColName name="COUNTRY_CDE" />
+    <CSVMapTo name="COUNTRY_CDE" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <db2ColName name="WW_CDE" />
+    <CSVMapTo name="WW_CDE" />
+    <dataType name="String" maxLength="2" />
+  </column>  
+  <column>
+    <db2ColName name="COMMENTS" />
+    <CSVMapTo name="COMMENTS" />
+    <dataType name="String" maxLength="80" />
+  </column>
+  
+  <!-- CSV columns used for read only -->
+  <column>
+    <CSVMapTo name="RESUBMIT_IND" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <CSVMapTo name="REJECT_ID" />
+    <dataType name="String" maxLength="20" />
+  </column>
+</CSV>

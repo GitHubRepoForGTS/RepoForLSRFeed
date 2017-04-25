@@ -1,0 +1,8 @@
+ClearCase CopyAreaDB|4
+tsgui_lb_comp\LSR\Feed Source\lib\lenovo
+2
+4
+f:DataMapper.java|1|1272aeec481|11355|31b3264a|c171408ec2114acaaf218b99240ec7a4|0
+e:CSVReader.java|1|1233d1a9750|159a|4c6eaf95|a93f9ae716bf4816ad7396016be7feac|0
+e:SubReport.java|1|1233d1a97cd|626|72abcc9|49f487b50302402f9737892a5b2d3f7b|0
+14:XMLErrorHandler.java|1|1233d1a97ec|9df|9ea0f8b1|74c86e6e9493424aa8c25cf5bc46f9a5|0

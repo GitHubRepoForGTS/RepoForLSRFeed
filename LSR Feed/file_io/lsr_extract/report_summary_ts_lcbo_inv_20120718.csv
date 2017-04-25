@@ -1,0 +1,2 @@
+project|contract|summary_id|requires_approval|detail_page|*store|*mach|*serial|*model|*description|warranty_exp_date|ma_start_date|ma_end_date|tag|device_type|status|purchase_date|call_number|call_completion
+"ts_lcbo_inv"|"TS_LCBO"|"10000"|"N"|"N"|"store"|"ABCD"|"1234"|"H2309"|"DESCRIPTION"|2012-09-30|2012-01-01|2012-09-30|"TAG"|"LCD MONITOR"|"ACTIVE"|2012-01-01|"12345678"|2012-03-12

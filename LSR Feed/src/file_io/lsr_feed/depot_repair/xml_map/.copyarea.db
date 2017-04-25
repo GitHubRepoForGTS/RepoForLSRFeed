@@ -1,0 +1,8 @@
+ClearCase CopyAreaDB|4
+tsgui_lb_comp\LSR\Feed Source\file_io\lsr_feed\depot_repair\xml_map
+2
+4
+10:approved_map.xml|1|1233d1a6505|56d|8d6d6b79|d269ade1ab164a7386c51ac38a00ae15|0
+10:rejected_map.xml|1|1233d1a6543|6e1|c45ccf96|8aaaa193ff314740a25ac62ab3254c9a|0
+17:new_transaction_map.xml|1|1253bb26452|d96|44f2af5d|e877e60c386741fa81846a1c692bcd39|0
+10:resubmit_map.xml|1|1233d1a6563|697|69a9b608|02be145f21504898a7cf82fdc6145f58|0

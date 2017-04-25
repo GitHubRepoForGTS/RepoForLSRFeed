@@ -1,0 +1,8 @@
+ClearCase CopyAreaDB|4
+tsgui_lb_comp\LSR\Feed Source\file_io\lsr_feed\break_fix\xml_map
+2
+4
+10:approved_map.xml|1|1233d1a63dc|657|5e61b19f|da2b87981265451eb53738ca4f8b89b7|0
+10:rejected_map.xml|1|1233d1a641b|777|d701fee0|421f6e919b224c5fbaea2ac565eb4884|0
+17:new_transaction_map.xml|1|1253bb2602c|d36|29c39442|2e2cfbd34e254272bac1b2d66464dbd3|0
+10:resubmit_map.xml|1|1233d1a6459|697|7286b534|bd7e28922baf46158bc5a68b535d02e3|0

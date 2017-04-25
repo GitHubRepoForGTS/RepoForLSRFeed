@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--                                                   -->
+<!-- Part Logistics - Approved Transaction DTD and XML -->
+<!--                                                   -->
+
+<!-- Modification History                                                			-->
+<!-- 01/06/2005 | KW | First Cut								-->
+<!-- 01/09/2005 | KW | Moved DTD to external file LSRFeed.dtd					-->
+<!-- 02/13/2007 | VM | Added PART COST and PART CREDIT columns that are read in			-->
+<!-- 02/27/2007 | VM | Changed PART CREDIT column from 9 to 10                          	-->
+<!-- 09/02/2008 | JWF| Changed Transaction_ID maxlength from 20 to 30                           -->
+<!-- 09/02/2008 | JWF| Changed DOCNUM maxlength from 9 to 12                                    -->
+<!-- 05/01/2009 | VM | Changed DOCNUM maxlength from 12 to 19                                   -->
+
+<!DOCTYPE CSV SYSTEM "./../../../dtd/LSRFeed.dtd">
+
+<CSV fileNameMustContain="invoice,accepted">
+  <targetTable name="LENOVO.PL_DETAIL" />
+  <column>
+    <CSVIndex number="0" name="MACH" />
+    <dataType name="String" maxLength="4" />
+  </column>
+  <column>
+    <CSVIndex number="4" name="DOCNUM" />
+    <dataType name="String" maxLength="19" />
+  </column>
+  <column>
+    <CSVIndex number="17" name="SERIAL" />
+    <dataType name="String" maxLength="25" />
+  </column>
+  <column>
+    <CSVIndex number="13" name="COUNTRY_CDE" />
+    <dataType name="String" maxLength="3" />
+  </column>
+  <column>
+    <CSVIndex number="14" name="WW_CDE" />
+    <dataType name="String" maxLength="2" />
+  </column>
+  <column>
+    <CSVIndex number="16" name="TRANSACTION_ID" />
+    <dataType name="String" maxLength="30" />
+  </column>
+  <column>
+    <CSVIndex number="1" name="LLI" />
+    <dataType name="String" maxLength="3" />
+  </column>  
+  <column>
+    <CSVIndex number="8" name="PART_COST" />
+    <dataType name="Decimal"/>
+  </column>
+  <column>
+    <CSVIndex number="10" name="PART_CREDIT" />
+    <dataType name="Decimal"/>
+  </column>  
+</CSV>
+

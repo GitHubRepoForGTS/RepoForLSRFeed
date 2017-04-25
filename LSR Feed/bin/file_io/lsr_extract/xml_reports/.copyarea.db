@@ -1,0 +1,18 @@
+ClearCase CopyAreaDB|4
+tsgui_lb_comp\LSR\Feed Source\file_io\lsr_extract\xml_reports
+2
+e
+20:summary_report_historic_rate.xml|1|12816c4744d|9417|2936e625|119057d16c51424aab2c1225ba1dfa3c|0
+12:check_historic.xml|1|1237aef2e93|99d|559d6b94|a59caa9e48ab4eb48235ae52f7b4068b|0
+10:invoice_text.xml|1|12816c3e7cd|627e|510de598|b3a04a388aef4b9a9bed48486d434924|0
+1a:Temp_Approved-Rejected.xml|1|1233d1a6255|1d1a|6991e7bb|3dfd3bc895844e55ad7a37b8c095c3ce|0
+15:validation_report.xml|1|12816c478d2|1fee|c8d0a01e|5caa22ee4a04416bb2fecf30582e0226|0
+b:accrual.xml|1|12816c482a5|2220|6978e416|857a7293c079433db57a08266ce34509|0
+c:invoices.xml|1|1233d1a61e8|10f5|aec38704|f4224b58b11946ea8e414f49307948cb|0
+11:credit_report.xml|1|12816c3f27b|c0ca|a1b8391b|ff31f4a31114412f98cd4edbed2ec157|0
+12:summary_report.xml|1|12816c3415b|e79f|f5cd38d9|19c927e0f9994404babee60cdad97ce3|0
+f:submit_lita.xml|1|12816c3eada|2f2d|4f403d6b|f9e0002aeb9140559ad17c8054bbcc74|0
+20:Temp_Approved-Rejectedcycle2.xml|1|1233d1a6275|1c66|185cbf1b|e799e93a5d464c2193554ea2ef2c059c|0
+1e:invoice_text_historic_rate.xml|1|12816c3f682|4a3f|8962ed9b|0f71fe0e28cd4ab1827b36da8dac797b|0
+b:rejects.xml|1|1233d1a6207|1cce|f726c398|15b83736ff914050b08f85151ae17e1f|0
+17:credit_invoice_text.xml|1|12816c3ee16|443a|40673120|f49475d11d754703972fb58884ab00f6|0

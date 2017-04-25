@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--                                                          	-->
+<!--    this file contains all database related information   	-->
+<!--                                                          	-->
+<!-- Modification History                                       -->
+<!-- 2010-03-18 | MM | Created new file                 		-->
+<!-- ********************************************************** -->
+
+<!DOCTYPE connections [ 
+<!ELEMENT connections (connection*) >  
+<!ELEMENT connection EMPTY >  
+<!ATTLIST connection id ID #REQUIRED > 
+<!ATTLIST connection server CDATA #IMPLIED> 
+<!ATTLIST connection port CDATA #IMPLIED> 
+<!ATTLIST connection driver CDATA #IMPLIED> 
+]> 
+<connections>  
+<connection id="LSRPROD" server="torlena1.mkm.can.ibm.com" port="60002" driver="com.ibm.db2.jcc.DB2Driver"/>  
+<connection id="LSRDEV" server="torlena1.mkm.can.ibm.com" port="60006" driver="com.ibm.db2.jcc.DB2Driver"/> 
+<connection id="LSRUAT" server="torlena1.mkm.can.ibm.com" port="60010" driver="com.ibm.db2.jcc.DB2Driver"/>
+<connection id="TORDSNQ" server="torstl3.mkm.can.ibm.com" port="3300" driver="com.ibm.db2.jcc.DB2Driver"/>
+<connection id="TSSIW" server="B01ACIRDB041.ahe.pok.ibm.com" port="3701" driver="com.ibm.db2.jcc.DB2Driver"/>
+</connections> 

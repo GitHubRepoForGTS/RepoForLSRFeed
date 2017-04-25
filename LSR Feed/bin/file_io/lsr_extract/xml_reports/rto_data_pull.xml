@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reports SYSTEM "./../../dtd/LSRExtract.dtd">
+
+<!-- ******************************************** -->
+<!-- Creates Remote Take Over Transaction Records -->
+<!-- ******************************************** -->
+<!-- XML Escape Characters                        -->
+<!-- "  &quot;                                    -->
+<!-- <  &lt;                                      -->
+<!-- >  &gt;                                      -->
+<!-- ******************************************** -->
+<!-- MODIFICATION HISTORY                         -->
+<!-- 2011-01-12 | CB | First Cut                  -->
+<!-- ******************************************** -->
+
+
+<reports>
+	<!-- Report1: RCS: Load Location:  /lsrfeed/file_io/lsr_feed/rcs/new_transaction/ -->
+  <report includeHeader="Db2Header">
+    <fileName text="rto_load_rcs.csv" />
+    <dateFormat text="YYYY/MM/DD" />
+    <timeFormat text="HH:MM:SS" />
+    <SQL text="
+     WITH
+     PERIOD_DATES(PERIOD_START_DTE,PERIOD_END_DTE) AS (
+       SELECT PERIOD_START_DTE,PERIOD_END_DTE
+       FROM LENOVO.PERIOD_DATES
+       WHERE PERIOD_END_DTE=LENOVO.CURR_PERIOD()
+     ),
+
+     RTO (CASE_NUMBER,RTO_DATE) AS (
+      SELECT DISTINCT CASE_NUMBER , DATE(END_TIME)AS END_DATE
+      FROM LENOVO.RTO
+      WHERE GEO IN ('CA','US')
+      AND DATE(END_TIME) BETWEEN (SELECT PERIOD_START_DTE FROM PERIOD_DATES)
+               AND (SELECT PERIOD_END_DTE FROM PERIOD_DATES)
+     ),
+
+     RTO_CNT (RTO_CNT) AS (
+       SELECT COUNT(*) FROM RTO
+     ),
+
+     RTO_CSV(
+         &quot;MACHINE TYPE&quot;,&quot;RCS SERIAL&quot;,&quot;LLI&quot;,&quot;PROBLEM NUMBER&quot;,&quot;POSTAL CODE&quot;,&quot;COUNTRY CODE&quot;,&quot;SDW COMPONENT&quot;
+        ,&quot;TRANSACTION COUNT&quot;,&quot;PROVINCE&quot;,&quot;SERV PERFORMED DATE&quot;,&quot;NSS CALL NUM&quot;
+        ,&quot;CALL RECD DATE&quot;,&quot;DATA SOURCE&quot;,&quot;BRAND&quot;,&quot;RCS CATEGORY&quot;, COMPANY_NAME) AS (
+      SELECT
+        MAX(B.MACH)
+       ,MAX(B.SERIAL)
+       ,MAX(B.LLI)
+       ,A.CASE_NUMBER
+       ,MAX(B.POSTAL_CDE)
+       ,MAX(B.COUNTRY_CDE)
+       ,'C0001711'
+       ,'1'
+       ,MAX(B.PROVINCE_NAME)
+       ,A.RTO_DATE
+       ,MAX(B.NSS_CALL_NUM)
+       ,MAX(B.CALL_RECD_DTE)
+       ,'RT'
+       ,MAX(B.BRAND)
+       ,MAX(VALUE(B.RCS_CATEGORY,''))
+       ,MAX(VALUE(B.COMPANY_NAME,''))
+      FROM RTO A
+        JOIN LENOVO.RCS_DETAIL B ON REPLACE(B.DOCNUM,'-','')=A.CASE_NUMBER
+      WHERE
+        B.PERIOD_END_DTE &gt;= LENOVO.CURR_PERIOD() - 1 YEAR
+     GROUP BY A.CASE_NUMBER,A.RTO_DATE
+     )
+
+     SELECT * FROM RTO_CSV
+
+     WITH UR
+
+      "/>
+    </report>
+
+</reports>

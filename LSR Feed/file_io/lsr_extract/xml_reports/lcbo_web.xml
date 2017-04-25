@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--    INVOICE VALIDATION REPORT.  THIS REPORT COMPARES THE TOTAL THAT IBM WILL INVOICE LENOVO  -->
+<!--    WITH THE TOTAL THAT LENOVO IS EXPECTING IBM TO INVOICE  -->
+
+<!-- Modification History                            	 		-->
+<!-- 2012-07-12 | VM | First Cut                                        -->
+
+
+<!DOCTYPE reports SYSTEM "./../../dtd/LSRExtract.dtd">
+
+<reports>
+ 
+	<report includeHeader="Db2Header">
+	<fileName text="report_summary_ts_lcbo_inv" delimiter="|"/>
+	<dateFormat text="yyyy-mm-dd" />
+	<timeFormat text="HH:MM:SS" />
+
+	<SQL text="
+		SELECT 
+		'ts_lcbo_inv' AS &quot;project&quot;,
+		'TS_LCBO' AS &quot;contract&quot;,
+		'10000' AS &quot;summary_id&quot;,
+		'N' AS &quot;requires_approval&quot;,
+		'N' AS &quot;detail_page&quot;,
+		STORE AS &quot;*store&quot;, 
+		MACH AS &quot;*mach&quot;, 
+		SERIAL AS &quot;*serial&quot;, 
+		MODEL AS &quot;*model&quot;, 
+		DESCRIPTION AS &quot;*description&quot;, 
+		WARRANTY_EXP_DATE AS &quot;warranty_exp_date&quot;, 
+		MA_START_DATE AS &quot;ma_start_date&quot;, 
+		MA_END_DATE AS &quot;ma_end_date&quot;, 
+		TAG AS &quot;tag&quot;, 
+		DEVICE_TYPE AS &quot;device_type&quot;, 
+		STATUS AS &quot;status&quot;, 
+		PURCHASE_DATE AS &quot;purchase_date&quot;, 
+		CALL_NUMBER AS &quot;call_number&quot;, 
+		CALL_COMPLETION AS &quot;call_completion&quot;
+		FROM LCBO.INVENTORY  	
+	"/>
+	</report>
+
+	<report includeHeader="None">
+	<fileName text="report_details_ts_lcbo_inv" delimiter="|"/>
+	<dateFormat text="yyyy-mm-dd" />
+	<timeFormat text="HH:MM:SS" />
+
+	<SQL text="
+		VALUES('summary_id|record_type|Quantity|Description|Upgrade|FRU|Price|')
+	"/>
+	</report>
+	
+	<report includeHeader="None">
+	<fileName text="user_mapping" delimiter="|"/>
+	<dateFormat text="yyyy-mm-dd" />
+	<timeFormat text="HH:MM:SS" />
+
+	<SQL text="
+		VALUES('zzzts_lcbo_inv@gcsc.ibm.com|ts_lcbo_inv|TS_LCBO|')
+	"/>
+	</report>
+
+</reports>

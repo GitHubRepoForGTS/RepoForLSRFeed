@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><!--                                                 --><!--    Install - New Transaction DTD and XML        --><!--                                                 --><!-- Modification History                                                			--><!-- 01/06/2005 | KW | Added fileNameMustContain attribute to CSV element in DTD		--><!--                   Changed LENA_CASE maxLength from 7 to 8                  		--><!--                   Changed SERIAL CSVMapTo from MACHINE SERIAL to INS SERIAL 		--><!--                   (distinct name helps detect when csv is put in wrong business folder)	--><!-- 01/09/2005 | KW | Moved DTD to external file LSRFeed.dtd					--><!-- 03/28/2006 | VM | C2246 Changed validation maxlength from 5 to 20 for BP_ID & ORIGINAL_BP_ID   --><!--                   C2246 Changed validation to -1, 0, 1 only for TRANSACTION_CNT                --><!-- 11/14/2009 | VM | V21  Removed LENA_CASE WESSN_DOCNUM WESSN_DOCNUM_DTE BP_ID ORIGINAL_BP_ID WW_CDE US_BILL_DESC CDN_BILL_DESC BILLING_RATE -->
+
+
+<!DOCTYPE CSV SYSTEM "./../../../dtd/LSRFeed.dtd"><CSV>  <targetTable name="LENOVO.INS_DETAIL" />
+  <column>    <db2ColName name="MACH" />    <CSVMapTo name="MACHINE TYPE" />    <dataType name="String" maxLength="4" />  </column>
+  <column>    <db2ColName name="SERIAL" />    <CSVMapTo name="INS SERIAL" />    <dataType name="String" maxLength="25" />  </column>
+  <column>    <db2ColName name="LLI" />    <CSVMapTo name="LLI" />    <dataType name="String" maxLength="3" />  </column>
+  <column>    <db2ColName name="SERVICE_DTE" />    <CSVMapTo name="SERVICE DATE" />    <dataType name="Date" dateFormat="YYYY/MM/DD" />  </column>  <column>    <db2ColName name="DOCNUM" />    <CSVMapTo name="PROBLEM NUMBER" />    <dataType name="String" maxLength="9" />  </column>
+  <column>    <db2ColName name="POSTAL_CDE" />    <CSVMapTo name="POSTAL CODE" />    <dataType name="String" maxLength="7" />  </column>
+  <column>    <db2ColName name="COUNTRY_CDE" />    <CSVMapTo name="COUNTRY CODE" />    <dataType name="String" maxLength="3" />  </column>
+  <column>    <db2ColName name="SDW_COMP_ID" />    <CSVMapTo name="SDW COMPONENT" />    <dataType name="String" maxLength="8" />  </column>  <column>    <db2ColName name="TRANSACTION_CNT" />    <CSVMapTo name="TRANSACTION COUNT" />    <dataType name="Integer" minValue="-1" maxValue="1" notEqValue="0" />  </column>
+  <column>    <db2ColName name="PROVINCE_NAME" />    <CSVMapTo name="PROVINCE" />    <dataType name="String" maxLength="25" />  </column>
+  <column>    <db2ColName name="SERV_PERFORMED_DTE" />    <CSVMapTo name="SERV PERFORMED DATE" />    <dataType name="Date" dateFormat="YYYY/MM/DD" />  </column>  <column>    <db2ColName name="NSS_CALL_NUM" />    <CSVMapTo name="NSS CALL NUM" />    <dataType name="String" maxLength="8" />  </column>  <column>    <db2ColName name="CALL_RECD_DTE" />    <CSVMapTo name="CALL RECD DATE" />    <dataType name="Date" dateFormat="YYYY/MM/DD" />  </column>
+  <column>    <db2ColName name="DATA_SOURCE" />    <CSVMapTo name="DATA SOURCE" />    <dataType name="String" maxLength="2" />  </column>
+</CSV>
+
